@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/FridayProject/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/FridayProject/static/js/main.d33c3adb.chunk.js",
-    "main.js.map": "/FridayProject/static/js/main.d33c3adb.chunk.js.map",
-    "runtime-main.js": "/FridayProject/static/js/runtime-main.6d096a00.js",
-    "runtime-main.js.map": "/FridayProject/static/js/runtime-main.6d096a00.js.map",
-    "static/js/2.499b90d9.chunk.js": "/FridayProject/static/js/2.499b90d9.chunk.js",
-    "static/js/2.499b90d9.chunk.js.map": "/FridayProject/static/js/2.499b90d9.chunk.js.map",
-    "static/js/3.7997ba4a.chunk.js": "/FridayProject/static/js/3.7997ba4a.chunk.js",
-    "static/js/3.7997ba4a.chunk.js.map": "/FridayProject/static/js/3.7997ba4a.chunk.js.map",
+    "main.css": "/FridayProject/static/css/main.8ceeb24d.chunk.css",
+    "main.js": "/FridayProject/static/js/main.505c7d4a.chunk.js",
+    "main.js.map": "/FridayProject/static/js/main.505c7d4a.chunk.js.map",
+    "runtime-main.js": "/FridayProject/static/js/runtime-main.6d38b888.js",
+    "runtime-main.js.map": "/FridayProject/static/js/runtime-main.6d38b888.js.map",
+    "static/js/2.10d8ddf4.chunk.js": "/FridayProject/static/js/2.10d8ddf4.chunk.js",
+    "static/js/2.10d8ddf4.chunk.js.map": "/FridayProject/static/js/2.10d8ddf4.chunk.js.map",
+    "static/js/3.a8080fa1.chunk.js": "/FridayProject/static/js/3.a8080fa1.chunk.js",
+    "static/js/3.a8080fa1.chunk.js.map": "/FridayProject/static/js/3.a8080fa1.chunk.js.map",
     "index.html": "/FridayProject/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/FridayProject/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.499b90d9.chunk.js.LICENSE.txt": "/FridayProject/static/js/2.499b90d9.chunk.js.LICENSE.txt"
+    "static/css/main.8ceeb24d.chunk.css.map": "/FridayProject/static/css/main.8ceeb24d.chunk.css.map",
+    "static/js/2.10d8ddf4.chunk.js.LICENSE.txt": "/FridayProject/static/js/2.10d8ddf4.chunk.js.LICENSE.txt",
+    "static/media/1548761996_2019-01-29_141751.e49107d4.jpg": "/FridayProject/static/media/1548761996_2019-01-29_141751.e49107d4.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6d096a00.js",
-    "static/js/2.499b90d9.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.d33c3adb.chunk.js"
+    "static/js/runtime-main.6d38b888.js",
+    "static/js/2.10d8ddf4.chunk.js",
+    "static/css/main.8ceeb24d.chunk.css",
+    "static/js/main.505c7d4a.chunk.js"
   ]
 }
