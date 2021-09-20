@@ -1,6 +1,9 @@
-import React, {ChangeEvent, useState} from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import React, {ChangeEvent, useEffect, useState} from 'react';
+import {useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { api } from '../../Dal/Api';
+import { isLoginTC } from '../../Store/Reducers/LoginReducer';
 import { AppRootStateType } from '../../Store/Store';
 import style from './Login.module.css'
 
@@ -12,7 +15,9 @@ type LoginParamsType = {
 }
 
 export const Login = () => {
+
     const status = useSelector<AppRootStateType, boolean>(state=>state.login.isLoggedIn)
+    const dispatch = useDispatch()
     let [login, setLogin] = useState<LoginParamsType>({
         email: '',
         password: '',
@@ -27,6 +32,7 @@ export const Login = () => {
         } else {
             setError('Incorrect username or passwords')
         }
+        dispatch(isLoginTC(login.email, login.password, login.rememberMe))
     }
 
     const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => login.email = e.currentTarget.value

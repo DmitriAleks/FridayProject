@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { api } from "../../Dal/Api";
+
 const initialState = {
     isLoggedIn: false
 }
@@ -21,3 +24,11 @@ export const setIsLoggedInAC = (status: boolean) => {
 }
 //type
 type ActionsType = ReturnType<typeof setIsLoggedInAC>
+//thumk
+export const isLoginTC = (email:string, password:string,rememberMe:boolean) => (dispatch: Dispatch) => {
+    api.inLogin(email, password, rememberMe)
+        .then((res)=>{
+            dispatch(setIsLoggedInAC(true))
+            console.log('вы зарегистрированы')
+        })
+}
