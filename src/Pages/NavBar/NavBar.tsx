@@ -13,7 +13,7 @@ const NavBar = () => {
         console.log(isAuth)
         return <Redirect to={'/login'}/>
     }
-    
+
 
     return (
         <div>
@@ -22,7 +22,7 @@ const NavBar = () => {
                 <div className={s.item}><NavLink  activeClassName={s.active} to={'/test'}>test</NavLink></div>
                 <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/profile'}>Profile</NavLink></div>
                 <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/registration'}>Registration</NavLink></div>
-                    <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/login'}>Login</NavLink></div>
+                <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/login'}>Login</NavLink></div>
             </nav>
         </div>
     );

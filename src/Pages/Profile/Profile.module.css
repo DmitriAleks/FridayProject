@@ -1,0 +1,32 @@
+.profile {
+    display: flex;
+    align-content: center;
+}
+
+.user {
+    flex-direction: row;
+    align-content: center;
+    background: #068fb3;
+    height: 50%;
+    width: 25%;
+}
+
+.user img {
+    background: #a3d782;
+    height: 50%;
+    width: 30%;
+    border-radius: 50px;
+}
+.user span {
+    align-content: center;
+}
+
+.user button {
+    width: 30%;
+}
+
+.table {
+    background: darkmagenta;
+    height: 50%;
+    width: 75%;
+}

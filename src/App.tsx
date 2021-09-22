@@ -7,22 +7,23 @@ import { PasswordRecovery } from './Pages/PasswordRecovery/PasswordRecovery';
 import { NewPassword } from './Pages/EnteringNewPassword/NewPassword';
 import { GlobalError } from './Common/Error/GlobalError';
 import Test from './Common/Test/Test';
-import NavBar from './Pages/NavBar/NavBar';
 import { Profile } from './Pages/Profile/Profile';
 import { api } from './Dal/Api';
 import { authMeTC } from './Store/Reducers/AppReducer';
 import {useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './Store/Store';
+import NavBar from './Pages/NavBar/NavBar';
 
 
 function App() {
     const dispatch = useDispatch()
-    
+
     
     useEffect(()=>{
        dispatch(authMeTC())
+        
     },[])
-
+    
   return (
     <div className="App">
      <NavBar/>
