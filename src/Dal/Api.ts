@@ -14,6 +14,10 @@ export const api = {
     inRegistr(email: string, password: string) {
         const promise = instance.post("auth/register",{email,password, })
         return promise
-    }
+    },
+    authME() {
+    const promise = instance.post("auth/me",)
+    return promise
+},
 }
-//register
+

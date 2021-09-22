@@ -1,8 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {useDispatch,  useSelector } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
+import { setIsLoggedInAC } from '../../Store/Reducers/LoginReducer';
+import { AppRootStateType } from '../../Store/Store';
 import s from './Navbar.module.css'
 
 const NavBar = () => {
+    const dispatch = useDispatch()
+    const isLoggedIn  = useSelector<AppRootStateType,boolean>(state=> state.login.isLoggedIn)
+    const isAuth  = useSelector<AppRootStateType,boolean>(state=> state.app.isAuth)
+    if(!isAuth) {
+        console.log(isAuth)
+        return <Redirect to={'/login'}/>
+    }
+    //const logout = dispatch(setIsLoggedInAC(false))
+
     return (
         <div>
             <nav className={s.nav}>
@@ -10,7 +22,7 @@ const NavBar = () => {
                 <div className={s.item}><NavLink  activeClassName={s.active} to={'/test'}>test</NavLink></div>
                 <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/profile'}>Profile</NavLink></div>
                 <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/registration'}>Registration</NavLink></div>
-                <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/login'}>Login</NavLink></div>
+                    <div className={s.item + ' ' + s.setting}><NavLink  activeClassName={s.active} to={'/login'}>Login</NavLink></div>
             </nav>
         </div>
     );

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import {Redirect, Route, Switch } from 'react-router-dom';
 import { Login } from './Pages/Login/Login';
 import { Registration } from './Pages/Registration/Registration';
 import { PasswordRecovery } from './Pages/PasswordRecovery/PasswordRecovery';
@@ -9,9 +9,19 @@ import { GlobalError } from './Common/Error/GlobalError';
 import Test from './Common/Test/Test';
 import NavBar from './Pages/NavBar/NavBar';
 import { Profile } from './Pages/Profile/Profile';
+import { api } from './Dal/Api';
+import { authMeTC } from './Store/Reducers/AppReducer';
+import {useDispatch, useSelector } from 'react-redux';
+import { AppRootStateType } from './Store/Store';
 
 
 function App() {
+    const dispatch = useDispatch()
+    
+    useEffect(()=>{
+       dispatch(authMeTC())
+    },[])
+
   return (
     <div className="App">
      <NavBar/>
@@ -27,5 +37,10 @@ function App() {
     </div>
   );
 }
-//test
+
+
 export default App;
+function useDispacth() {
+    throw new Error('Function not implemented.');
+}
+

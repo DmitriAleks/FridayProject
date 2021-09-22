@@ -29,6 +29,6 @@ export const isLoginTC = (email:string, password:string,rememberMe:boolean) => (
     api.inLogin(email, password, rememberMe)
         .then((res)=>{
             dispatch(setIsLoggedInAC(true))
-            console.log('вы зарегистрированы')
+            console.log('сработала isLoginTC true ')
         })
 }
