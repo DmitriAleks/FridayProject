@@ -13,7 +13,7 @@ const NavBar = () => {
         console.log(isAuth)
         return <Redirect to={'/login'}/>
     }
-    //const logout = dispatch(setIsLoggedInAC(false))
+    
 
     return (
         <div>

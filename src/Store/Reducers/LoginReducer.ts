@@ -1,5 +1,7 @@
 import { Dispatch } from "redux";
 import { api } from "../../Dal/Api";
+import { authMe } from "./AppReducer";
+import { addedUsersProfileAC } from "./ProfileReducer";
 
 const initialState = {
     isLoggedIn: false
@@ -28,7 +30,10 @@ type ActionsType = ReturnType<typeof setIsLoggedInAC>
 export const isLoginTC = (email:string, password:string,rememberMe:boolean) => (dispatch: Dispatch) => {
     api.inLogin(email, password, rememberMe)
         .then((res)=>{
+            dispatch(authMe(true))
             dispatch(setIsLoggedInAC(true))
+            dispatch(addedUsersProfileAC(res.data))
             console.log('сработала isLoginTC true ')
+       
         })
 }

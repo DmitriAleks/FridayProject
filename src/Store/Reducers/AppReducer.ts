@@ -1,6 +1,7 @@
 import { Dispatch } from "redux"
 import { api } from "../../Dal/Api"
 import { setIsLoggedInAC } from "./LoginReducer"
+import { addedUsersProfileAC } from "./ProfileReducer"
 
 const initialState = {
     isAuth: false
@@ -31,7 +32,9 @@ export const authMeTC = () => (dispatch: Dispatch) => {
     api.authME().then((res)=>{
         dispatch(authMe(true))
         dispatch(setIsLoggedInAC(true))
+        dispatch(addedUsersProfileAC(res.data))
         console.log('сработал autme True')
+        console.log(res.data)
     })
         .catch((e)=>{
             dispatch(authMe(false))

@@ -16,7 +16,7 @@ type LoginParamsType = {
 
 export const Login = () => {
 
-    const status = useSelector<AppRootStateType, boolean>(state=>state.login.isLoggedIn)
+    const status = useSelector<AppRootStateType, boolean>(state=>state.app.isAuth)
     const dispatch = useDispatch()
     let [login, setLogin] = useState<LoginParamsType>({
         email: '',
