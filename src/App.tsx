@@ -13,6 +13,7 @@ import { authMeTC } from './Store/Reducers/AppReducer';
 import {useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './Store/Store';
 import NavBar from './Pages/NavBar/NavBar';
+import HideTest from './Common/Test/HideTest';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         <Route path={'/404'} render={() => <GlobalError/>}/>
         <Route path={'/recoverypassword'} render={() => <PasswordRecovery/>}/>
         <Route path={'/entrynewpassword'} render={() => <NewPassword/>}/>
-        <Route path={'/test'} render={() => <Test/>}/>
+        <Route path={'/test'} render={() => <HideTest/>}/>
       </Switch>
     </div>
   );

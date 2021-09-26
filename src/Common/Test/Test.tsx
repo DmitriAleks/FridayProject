@@ -6,7 +6,42 @@ import {apiCart} from '../../Dal/Api';
 import axios from 'axios';
 import s from './Test.module.css'
 import Table from './TestTable';
+ export type testDataProps ={
+     data: Array<testObjType>
+ }
 
+
+
+ export type testObjType = {
+    "name": string,
+    "grade": number,
+    "shots": number,
+    "cardsCount": number,
+    "rating": number,
+}
+
+const Test = (props: testDataProps) => {
+    useEffect(() => {
+        axios.get('http://localhost:7542/2.0/cards/pack?user_id=5eb543f6bea3ad21480f1ee7')
+            .then((res) => {
+                console.log(res)
+            })
+    })
+    return (
+        <div>
+            <div className={s.headerTable}>
+                <div style={{'backgroundColor': 'blue'}}>Name</div>
+                <div style={{'backgroundColor': 'orange'}}>CardsCount</div>
+                <div style={{'backgroundColor': 'yellow'}}>Update</div>
+                <div style={{'backgroundColor': 'silver'}}>URL</div>
+                <div style={{'backgroundColor': 'sienna'}}>Added</div>
+            </div>
+            {props.data.map((el)=>    <Table name={el.name} countCard={el.cardsCount}
+                                             shots={el.shots} grade={el.grade} rating={el.rating} />)}
+
+        </div>
+    );
+};
 const testData = {
     "cardPacks": [{
         "_id": "6150916b2c72d7294c82d555",
@@ -33,34 +68,4 @@ const testData = {
     "token": "9ece97d0-1eeb-11ec-8b8f-d9ff01ee5ea4",
     "tokenDeathTime": 1632686587213
 }
-
-const testObj = {
-    "name": "999",
-    "grade": 0,
-    "shots": 0,
-    "cardsCount": 0,
-    "rating": 0,
-}
-
-const Test = () => {
-    useEffect(() => {
-        axios.get('http://localhost:7542/2.0/cards/pack?user_id=5eb543f6bea3ad21480f1ee7')
-            .then((res) => {
-                console.log(res)
-            })
-    })
-    return (
-        <div>
-            <div className={s.headerTable}>
-                <div style={{'backgroundColor': 'blue'}}>Name</div>
-                <div style={{'backgroundColor': 'orange'}}>CardsCount</div>
-                <div style={{'backgroundColor': 'yellow'}}>Update</div>
-                <div style={{'backgroundColor': 'silver'}}>URL</div>
-                <div style={{'backgroundColor': 'sienna'}}>Added</div>
-            </div>
-            <Table name={testObj.name} countCard={testObj.cardsCount} shots={testObj.shots} grade={testObj.grade} rating={testObj.rating} />
-        </div>
-    );
-};
-
 export default Test;
