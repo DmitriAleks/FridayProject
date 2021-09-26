@@ -1,14 +1,47 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SuperInputText from './c1-SuperInputText/SuperInputText';
 import SuperCheckbox from './c3-SuperCheckbox/SuperCheckbox';
 import SuperButton from './c2-SuperButton/SuperButton';
+import {apiCart} from '../../Dal/Api';
+import axios from 'axios';
+
+const testData = {
+    "cardPacks": [{
+        "_id": "6150916b2c72d7294c82d555",
+        "user_id": "60b4ae9724476f0b043efea8",
+        "user_name": "victor_bars_bars95@mail.ru",
+        "private": false,
+        "name": "999",
+        "path": "/def",
+        "grade": 0,
+        "shots": 0,
+        "cardsCount": 0,
+        "type": "pack",
+        "rating": 0,
+        "created": "2021-09-26T15:27:39.108Z",
+        "updated": "2021-09-26T15:27:39.108Z",
+        "more_id": "60b4ae9724476f0b043efea8",
+        "__v": 0
+    }],
+    "page": 1,
+    "pageCount": 4,
+    "cardPacksTotalCount": 2757,
+    "minCardsCount": 0,
+    "maxCardsCount": 103,
+    "token": "9ece97d0-1eeb-11ec-8b8f-d9ff01ee5ea4",
+    "tokenDeathTime": 1632686587213
+}
 
 const Test = () => {
+    useEffect(() => {
+        axios.get('http://localhost:7542/2.0/cards/pack?user_id=5eb543f6bea3ad21480f1ee7')
+            .then((res) => {
+                console.log(res)
+            })
+    })
     return (
         <div>
-            <SuperInputText/>
-            <SuperCheckbox/>
-            <SuperButton />
+
         </div>
     );
 };

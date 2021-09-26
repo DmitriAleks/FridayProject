@@ -20,4 +20,10 @@ export const api = {
     return promise
 },
 }
+export const apiCart = {
+    getCard(){
+        const promise = instance.get('cards/pack')
+        return promise
+    }
+}
 
