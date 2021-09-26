@@ -4,6 +4,8 @@ import SuperCheckbox from './c3-SuperCheckbox/SuperCheckbox';
 import SuperButton from './c2-SuperButton/SuperButton';
 import {apiCart} from '../../Dal/Api';
 import axios from 'axios';
+import s from './Test.module.css'
+import Table from './TestTable';
 
 const testData = {
     "cardPacks": [{
@@ -32,6 +34,14 @@ const testData = {
     "tokenDeathTime": 1632686587213
 }
 
+const testObj = {
+    "name": "999",
+    "grade": 0,
+    "shots": 0,
+    "cardsCount": 0,
+    "rating": 0,
+}
+
 const Test = () => {
     useEffect(() => {
         axios.get('http://localhost:7542/2.0/cards/pack?user_id=5eb543f6bea3ad21480f1ee7')
@@ -41,7 +51,14 @@ const Test = () => {
     })
     return (
         <div>
-
+            <div className={s.headerTable}>
+                <div style={{'backgroundColor': 'blue'}}>Name</div>
+                <div style={{'backgroundColor': 'orange'}}>CardsCount</div>
+                <div style={{'backgroundColor': 'yellow'}}>Update</div>
+                <div style={{'backgroundColor': 'silver'}}>URL</div>
+                <div style={{'backgroundColor': 'sienna'}}>Added</div>
+            </div>
+            <Table name={testObj.name} countCard={testObj.cardsCount} shots={testObj.shots} grade={testObj.grade} rating={testObj.rating} />
         </div>
     );
 };
