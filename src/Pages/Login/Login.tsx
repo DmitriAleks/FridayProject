@@ -1,10 +1,12 @@
-import axios from 'axios';
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { api } from '../../Dal/Api';
-import { isLoginTC } from '../../Store/Reducers/LoginReducer';
-import { AppRootStateType } from '../../Store/Store';
+import React, {ChangeEvent, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {NavLink, Redirect} from 'react-router-dom';
+import {isLoginTC} from '../../Store/Reducers/LoginReducer';
+import {AppRootStateType} from '../../Store/Store';
+
+import SuperInputText from "../../Common/Test/c1-SuperInputText/SuperInputText";
+import SuperCheckbox from '../../Common/Test/c3-SuperCheckbox/SuperCheckbox';
+import SuperButton from "../../Common/Test/c2-SuperButton/SuperButton";
 import style from './Login.module.css'
 
 
@@ -13,60 +15,66 @@ type LoginParamsType = {
     password: string,
     rememberMe: boolean
 }
-
+//test123
 export const Login = () => {
-
-    const status = useSelector<AppRootStateType, boolean>(state=>state.app.isAuth)
     const dispatch = useDispatch()
+    const status = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     let [login, setLogin] = useState<LoginParamsType>({
         email: '',
         password: '',
         rememberMe: false
     })
-    const [error, setError] = useState<string>('')
+
 
     const onSubmit = () => {
-        if (login.email !== '' && login.email.length > 7
-            && login.password !== '' && login.password.length > 7) {
-            setError('')
-        } else {
-            setError('Incorrect username or passwords')
-        }
         dispatch(isLoginTC(login.email, login.password, login.rememberMe))
     }
 
-    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => login.email = e.currentTarget.value
-    const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) =>  login.password = event.currentTarget.value
-    const handleChangeRememberMe = (event: ChangeEvent<HTMLInputElement>) =>  login.rememberMe = event.currentTarget.checked
-    if(status) {
+    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setLogin({...login, email: e.currentTarget.value})
+    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => setLogin({
+        ...login,
+        password: e.currentTarget.value
+    })
+    const handleChangeRememberMe = (e: ChangeEvent<HTMLInputElement>) => setLogin({
+        ...login,
+        rememberMe: e.currentTarget.checked
+    })
+    if (status) {
         return <Redirect to={'/profile'}/>
     }
     return (
-        <div className={style.login} >
-            <div className={style.title}>
-                <h1>Welcome to site</h1>
-                <h3>Sign In</h3>
+        <div className={style.wrapContainer}>
+            <div className={style.container}>
+                <div>
+                    <h1>Welcome</h1>
+                    <h3>Sign In</h3>
+                </div>
+                <div>
+                    <SuperInputText name={'email'} type={'email'} onChange={handleChangeEmail} placeholder={'Email'}/>
+                </div>
+                <div>
+                    <SuperInputText name={'password'} type={'password'} onChange={handleChangePassword}
+                                    placeholder={'Password'}/>
+                </div>
+                <div>
+                    <label>Remember me</label> <SuperCheckbox type="checkbox" onChange={handleChangeRememberMe} name={'rememberMe'}/>
+                </div>
+                <div>
+                    <NavLink to={'/recoverypassword'} className={style.link}>Forgot Password</NavLink>
+                </div>
+                <div>
+                    <SuperButton onClick={onSubmit} value={'Login'}/>
+                </div>
+                <div>
+                    <NavLink to={'/registration'} className={style.link}>Register</NavLink>
+                </div>
             </div>
-            <div>
-                <label>Email:</label> <input onChange={handleChangeEmail}  title={'enter email'} type="email" name={'email'}/>
-            </div>
-            <div>
-                <label>Password:</label> <input onChange={handleChangePassword} title={'enter password'} type="password" name={'password'}/>
-            </div>
-            <div className={style.error} >{error !== '' && error}</div>
-            <div>
-                <label>Remember me</label><input type="checkbox" onChange={handleChangeRememberMe} name={'rememberMe'}/>
-            </div>
-            <div>
-                <a href="#/login"  title={'Forgot your password?'}>Forgot Password</a>
-            </div>
-            <div>
-                <button className={style.button} onClick={onSubmit}> Sign In</button>
-            </div>
-            <div>
-                <a href="#/registration" title={"Don't have an account?"}>Register</a>
-            </div>
+
         </div>
 
     );
+}
+
+function setEditModeRecoveryPassword(arg0: boolean): any {
+    throw new Error('Function not implemented.');
 }

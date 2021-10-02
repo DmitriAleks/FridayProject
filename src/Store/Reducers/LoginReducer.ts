@@ -1,20 +1,21 @@
-import { Dispatch } from "redux";
-import { api } from "../../Dal/Api";
-import { authMe } from "./AppReducer";
-import { addedUsersProfileAC } from "./ProfileReducer";
+import {api} from '../../Dal/Api';
+import { removeAlert, setAlertList } from './AppReducer';
+import {AppThunk} from '../Store';
+import {setProfileData} from './ProfileReducer';
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
 }
-type initialState = typeof initialState
-export const loginReducer = (state:initialState = initialState, action: ActionsType): initialState => {
+
+export const loginReducer = (state: InitialState = initialState, action: LoginActionsType): InitialState => {
     switch (action.type) {
         case 'login/SET-IS-LOGGED-IN':
+            return {...state, isLoggedIn: action.status}
+        case 'login/SET-IS-LOGOUT':
             return {...state, isLoggedIn: action.status}
         default:
             return state
     }
-    return state
 };
 
 //actions
@@ -24,16 +25,37 @@ export const setIsLoggedInAC = (status: boolean) => {
         status
     } as const
 }
-//type
-type ActionsType = ReturnType<typeof setIsLoggedInAC>
-//thumk
-export const isLoginTC = (email:string, password:string,rememberMe:boolean) => (dispatch: Dispatch) => {
-    api.inLogin(email, password, rememberMe)
-        .then((res)=>{
-            dispatch(authMe(true))
-            dispatch(setIsLoggedInAC(true))
-            dispatch(addedUsersProfileAC(res.data))
-            console.log('сработала isLoginTC true ')
-       
-        })
+export const setIsLogoutAC = (status: boolean) => {
+    return {
+        type: 'login/SET-IS-LOGOUT',
+        status
+    } as const
 }
+//thunk
+export const isLoginTC = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
+    api.inLogin(email, password, rememberMe)
+        .then((res) => {
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setProfileData(res.data))
+            //диспач экшена профайла, для получения данных с сервера
+        }).catch((e) => {
+            dispatch(setAlertList({id: 2, type: 'error', title: e.response.data.error}))
+            setTimeout(() => dispatch(removeAlert(2)), 2000)
+    })
+}
+export const isLogoutTC = (logout: boolean): AppThunk => (dispatch) => {
+    api.inLogout()
+        .then(() => {
+            dispatch(setIsLogoutAC(logout))
+        }).catch((e) => {
+        dispatch(setAlertList({id: 1, type: 'error', title: e.response.data.error}))
+        setTimeout(() => dispatch(removeAlert(1)), 2000)
+    })
+}
+
+//type
+export type LoginActionsType =
+    | ReturnType<typeof setIsLoggedInAC>
+    | ReturnType<typeof setIsLogoutAC>
+
+type InitialState = typeof initialState

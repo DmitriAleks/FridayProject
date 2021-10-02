@@ -1,36 +1,56 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Redirect} from 'react-router-dom';
-import {authMe} from '../../Store/Reducers/AppReducer';
-import {setIsLoggedInAC} from '../../Store/Reducers/LoginReducer';
-import {UserType} from '../../Store/Reducers/ProfileReducer';
+import styles from './Profile.module.scss'
+import defaultAvatar from '../../Images/user.svg'
+import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../Store/Store';
-import style from './Profile.module.css'
-import anonimPhoto from '../../Images/anonimUsers.jpg'
-
+import Table from '../Table/Table';
+import SuperInputText from '../../Common/Test/c1-SuperInputText/SuperInputText';
+import {ProfileDataType} from '../../Store/Reducers/ProfileReducer';
 
 export const Profile = () => {
-    const dispatch = useDispatch()
-    const isLogout = () => dispatch(authMe(false))
-    const user = useSelector<AppRootStateType, UserType>(state => state.profile)
-
+    const userData = useSelector<AppRootStateType, ProfileDataType>(state => state.profile.profileData)
 
     return (
-        <div className={style.profile}>
-            <div className={style.user}>
-                <div>
-                    {!user.avatar && <img src={anonimPhoto}/>}
+
+        <section className={styles.profile}>
+            <div className={'container'}>
+                <div className={styles.profile__inner}>
+                    <div className={styles.profile__info}>
+                        <div className={styles.profile__avatar}>
+                            <img src={userData?.avatar ? userData.avatar : defaultAvatar} alt=" "/>
+                        </div>
+                        <div className={styles.profile__description}>
+                            <p>{userData?.email}</p>
+                            <p>{userData?.name}</p>
+                            <p>Your cards: {userData?.publicCardPacksCount}</p>
+                        </div>
+                        <div>
+                            Number of cards
+                        </div>
+                        <div>
+                            555
+                        </div>
+                        <input type="range" name="range" min="0" max="100" value="99"/>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                Packs list Petr’s
+                            </div>
+                            <SuperInputText/>
+                        </div>
+                        <div>
+                            <Table/>
+                        </div>
+                        <div>
+                            Pagination
+                        </div>
+                    </div>
+
                 </div>
-                <div className={style.a}>
-                    {user.name}
-                    <div>Frontend Developer </div>
-                </div>
-                <button onClick={isLogout}>logout</button>
+
             </div>
-            <div className={style.table}>
-                {user.email}
-            </div>
-        </div>
+        </section>
 
 
     );

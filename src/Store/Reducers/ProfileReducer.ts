@@ -1,40 +1,34 @@
-
-
 const initialState = {
-} as UserType
-export type UserType = {
-    _id: string
-    name: string
-    email: string
-    avatar?: string
-    publicCardPacksCount: number
-    created: Date
-    updated: Date
-    isAdmin: boolean
-    verified: boolean
-    rememberMe: boolean
-   error?:string
-
-
+    profileData: {
+        _id: '',
+        email: '',
+        name: '',
+        avatar: '',
+        publicCardPacksCount: null as null | number
+    }
 }
-export const profileReducer = (state = initialState, action: AllActionsTypes):UserType => {
+export type InitStateType = typeof initialState
+export const profileReducer = (state: InitStateType = initialState, action: ProfileActionType): InitStateType => {
     switch (action.type) {
-        case "ADDED-USERS-PROFILE": {
-            return {...state = action.users}
-        }
-            default: return state
+        case 'profile/SET-PROFILE-DATA':
+            return {...state, profileData: action.payload}
+        default:
+            return state
     }
-
 };
+// export const changeNameOrAvatar = (payload: { name: string, avatar: string }) =>
+//     ({type: 'profile/CHANGE-NAME-OR-AVATAR', payload} as const)
+export const setProfileData = (payload: ProfileDataType) => ({type: 'profile/SET-PROFILE-DATA', payload} as const)
 
-//actions
-export const addedUsersProfileAC = (users:UserType) =>{
-    return {
-        type: 'ADDED-USERS-PROFILE',
-        users
-    }
+
+export type ProfileDataType = {
+    _id: string
+    email: string
+    name: string
+    avatar: string
+    publicCardPacksCount: null | number
 }
-//types
-type AddedUsersProfileAT = ReturnType<typeof addedUsersProfileAC>
-type AllActionsTypes = 
-    |AddedUsersProfileAT
+export type SetProfileDataAT = ReturnType<typeof setProfileData>
+export type ProfileActionType =
+    | SetProfileDataAT
+    // | ReturnType<typeof changeNameOrAvatar>
